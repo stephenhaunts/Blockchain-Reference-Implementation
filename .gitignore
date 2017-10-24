@@ -4,3 +4,19 @@
 BlockChainCourse/bin/Debug/netcoreapp2\.0/
 
 BlockChainCourse/obj/
+
+\.DS_Store
+
+BlockWithMultipleTransactions/bin/Debug/netcoreapp2\.0/
+
+\.vs/BlockChainCourse/v15/sqlite3/
+
+*.cache
+
+BlockWithMultipleTransactions/obj/
+
+BlockWithSingleTransaction/bin/Debug/netcoreapp2\.0/
+
+BlockWithSingleTransaction/obj/
+
+\.vs/BlockChainCourse/v15/\.suo
