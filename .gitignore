@@ -1,0 +1,6 @@
+
+*.userprefs
+
+BlockChainCourse/bin/Debug/netcoreapp2\.0/
+
+BlockChainCourse/obj/

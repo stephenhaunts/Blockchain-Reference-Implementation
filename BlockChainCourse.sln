@@ -1,0 +1,24 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptography", "BlockChainCourse\Cryptography.csproj", "{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module 2 - Cryptography", "Module 2 - Cryptography", "{3B87AEA0-767B-4D06-BD55-BFA3D62FDE5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module 3 - Storing Transactions", "Module 3 - Storing Transactions", "{BF003484-1636-4C15-B32D-8B1A3AF44811}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D} = {3B87AEA0-767B-4D06-BD55-BFA3D62FDE5D}
+	EndGlobalSection
+EndGlobal
