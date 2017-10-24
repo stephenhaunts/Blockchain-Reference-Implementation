@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlockWithSingleTransaction
+namespace BlockChainCourse.BlockWithSingleTransaction
 {
     class Program
     {
