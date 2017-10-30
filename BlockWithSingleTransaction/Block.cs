@@ -2,30 +2,6 @@
 
 namespace BlockChainCourse.BlockWithSingleTransaction
 {
-    public enum ClaimType
-    {
-        TotalLoss = 0    
-    }
-
-    public interface IBlock
-    {
-        string ClaimNumber { get; set; }
-        decimal SettlementAmount { get; set; }
-        DateTime SettlementDate { get; set; }
-        string CarRegistration { get; set; }
-        int Mileage { get; set; }
-        ClaimType ClaimType { get; set; }
-
-        int BlockNumber { get; }
-        DateTime CreatedDate { get; }
-        string BlockHash { get; }
-        string PreviousBlockHash { get; set; }
-
-        string CalculateBlockHash();
-        void SetBlockHash();
-        IBlock NextBlock { get; }
-    }
-
     public class Block : IBlock
     {
         // Provided by the user
@@ -72,6 +48,11 @@ namespace BlockChainCourse.BlockWithSingleTransaction
 
         public void SetNextBlock (IBlock nextBlock)
         {
+            if (NextBlock != null)
+            {
+                throw new InvalidOperationException("Next block has already been set!");    
+            }
+
             // Assign next block
             NextBlock = nextBlock;
 
