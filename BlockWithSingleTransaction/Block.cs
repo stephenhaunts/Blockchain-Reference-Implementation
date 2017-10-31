@@ -52,11 +52,6 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         // Set the block hash
         public void SetBlockHash(IBlock parent)
         {
-            if (string.IsNullOrEmpty(BlockHash))
-            {
-                throw new InvalidOperationException("The block hash has already been comitted!");   
-            }
-
             if (parent != null)
             {
                 PreviousBlockHash = parent.BlockHash;
