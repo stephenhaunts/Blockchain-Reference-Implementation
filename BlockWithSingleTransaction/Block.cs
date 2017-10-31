@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using BlockChainCourse.Cryptography;
 
 namespace BlockChainCourse.BlockWithSingleTransaction
 {
@@ -17,50 +19,56 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         public DateTime CreatedDate { get; private set; }
         public string BlockHash { get; private set; }
         public string PreviousBlockHash { get; set; }
-        public IBlock NextBlock { get; private set; }
+        public IBlock NextBlock { get; set; }
 
-        public Block(string claimNumber,
+        public Block(int blockNumber,
+                     string claimNumber,
                      decimal settlementAmount,
                      DateTime settlementDate,
                      string carRegistration,
                      int mileage,
                      ClaimType claimType)
         {
+            BlockNumber = blockNumber;
             ClaimNumber = claimNumber;
             SettlementAmount = settlementAmount;
             SettlementDate = settlementDate;
             CarRegistration = carRegistration;
             Mileage = mileage;
             ClaimType = claimType;
+            CreatedDate = DateTime.UtcNow;
         }
 
         // Calculate and return the block hash
         public string CalculateBlockHash()
         {
-            return "";
+            string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
+            string blockheader = BlockNumber + txnHash + CreatedDate + PreviousBlockHash;
+            string combined = txnHash + blockheader;
+
+            return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
         }
 
         // Set the block hash
-        public void SetBlockHash()
+        public void SetBlockHash(IBlock parent)
         {
-            BlockHash = CalculateBlockHash();
-        }
-
-        public void SetNextBlock (IBlock nextBlock)
-        {
-            if (NextBlock != null)
+            if (string.IsNullOrEmpty(BlockHash))
             {
-                throw new InvalidOperationException("Next block has already been set!");    
+                throw new InvalidOperationException("The block hash has already been comitted!");   
             }
 
-            // Assign next block
-            NextBlock = nextBlock;
+            if (parent != null)
+            {
+                PreviousBlockHash = parent.BlockHash;
+                parent.NextBlock = this;
+            }
+            else
+            {
+                // Previous block is the genesis block.
+                PreviousBlockHash = null;
+            }
 
-            // Calculate the hash for this block
-            SetBlockHash();
-
-            // Then assign it to the previous block hash of the next block in the chain.
-            NextBlock.PreviousBlockHash = BlockHash;
+            BlockHash = CalculateBlockHash();
         }
     }
 }

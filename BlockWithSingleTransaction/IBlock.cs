@@ -17,7 +17,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         string PreviousBlockHash { get; set; }
 
         string CalculateBlockHash();
-        void SetBlockHash();
-        IBlock NextBlock { get; }
+        void SetBlockHash(IBlock parent);
+        IBlock NextBlock { get; set; }
     }
 }
