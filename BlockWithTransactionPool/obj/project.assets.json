@@ -196,6 +196,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Cryptography/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Cryptography.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cryptography.dll": {}
+        }
       }
     },
     ".NETCoreApp,Version=v2.0/win": {
@@ -392,6 +402,16 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "Cryptography/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Cryptography.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cryptography.dll": {}
         }
       }
     },
@@ -838,6 +858,16 @@
         "native": {
           "runtimes/win-x64/native/hostfxr.dll": {}
         }
+      },
+      "Cryptography/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Cryptography.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cryptography.dll": {}
+        }
       }
     },
     ".NETCoreApp,Version=v2.0/win-x86": {
@@ -1282,6 +1312,16 @@
         },
         "native": {
           "runtimes/win-x86/native/hostfxr.dll": {}
+        }
+      },
+      "Cryptography/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Cryptography.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cryptography.dll": {}
         }
       }
     }
@@ -2265,10 +2305,16 @@
         "runtimes/win-x86/native/hostfxr.dll",
         "version.txt"
       ]
+    },
+    "Cryptography/1.0.0": {
+      "type": "project",
+      "path": "../BlockChainCourse/Cryptography.csproj",
+      "msbuildProject": "../BlockChainCourse/Cryptography.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Cryptography >= 1.0.0",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -2295,7 +2341,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/BlockChainCourse/Cryptography.csproj": {
+              "projectPath": "/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/BlockChainCourse/Cryptography.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
