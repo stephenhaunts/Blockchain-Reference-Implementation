@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockWithSingleTransaction"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockWithMultipleTransactions", "BlockWithMultipleTransactions\BlockWithMultipleTransactions.csproj", "{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockWithTransactionPool", "BlockWithTransactionPool\BlockWithTransactionPool.csproj", "{12BE2FA0-B722-4D96-932D-322F61BB6A46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +31,15 @@ Global
 		{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12BE2FA0-B722-4D96-932D-322F61BB6A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12BE2FA0-B722-4D96-932D-322F61BB6A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12BE2FA0-B722-4D96-932D-322F61BB6A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12BE2FA0-B722-4D96-932D-322F61BB6A46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5FF0E08D-AD3D-4C38-9FCE-8C1051F3AC0D} = {3B87AEA0-767B-4D06-BD55-BFA3D62FDE5D}
 		{E27C9677-95B2-4872-992C-52EF8A4D96AA} = {BF003484-1636-4C15-B32D-8B1A3AF44811}
 		{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7} = {BF003484-1636-4C15-B32D-8B1A3AF44811}
+		{12BE2FA0-B722-4D96-932D-322F61BB6A46} = {BF003484-1636-4C15-B32D-8B1A3AF44811}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,4 @@
 ﻿using System;
-using Clifton.Blockchain;
 
 namespace BlockChainCourse.BlockWithMultipleTransactions
 {
@@ -7,7 +6,6 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
     {
         static void Main(string[] args)
         {
-
             ITransaction txn1 = new Transaction("ABC123", 1000.00m, DateTime.Now, "QWE123", 10000, ClaimType.TotalLoss);
             ITransaction txn2 = new Transaction("VBG345", 2000.00m, DateTime.Now, "JKH567", 20000, ClaimType.TotalLoss);
             ITransaction txn3 = new Transaction("XCF234", 3000.00m, DateTime.Now, "DH23ED", 30000, ClaimType.TotalLoss);
@@ -51,7 +49,6 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             block4.AddTransaction(txn15);
             block4.AddTransaction(txn16);
 
-
             block1.SetBlockHash(null);
             block2.SetBlockHash(block1);
             block3.SetBlockHash(block2);
@@ -70,7 +67,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             Console.WriteLine("");
             Console.WriteLine("");
           
-            txn13.ClaimNumber = "weqwewe";
+            txn5.ClaimNumber = "weqwewe";
             chain.VerifyChain();
 
             Console.WriteLine();
