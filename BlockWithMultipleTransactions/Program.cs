@@ -57,6 +57,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             block3.SetBlockHash(block2);
             block4.SetBlockHash(block3);
 
+
             BlockChain chain = new BlockChain();
             chain.AcceptBlock(block1);
             chain.AcceptBlock(block2);
@@ -69,7 +70,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             Console.WriteLine("");
             Console.WriteLine("");
           
-            txn3.ClaimNumber = "weqwewe";
+            txn13.ClaimNumber = "weqwewe";
             chain.VerifyChain();
 
             Console.WriteLine();

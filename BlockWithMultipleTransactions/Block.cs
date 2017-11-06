@@ -82,9 +82,11 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             {
                 isValid = false;
             }
-
-            // Does the previous block hash match the latest previous block hash
-            isValid |= PreviousBlockHash == prevBlockHash;
+            else
+            {
+                // Does the previous block hash match the latest previous block hash
+                isValid |= PreviousBlockHash == prevBlockHash;
+            }
 
             PrintVerificationMessage(verbose, isValid);
 
