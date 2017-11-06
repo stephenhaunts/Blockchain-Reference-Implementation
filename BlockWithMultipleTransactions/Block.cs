@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using BlockChainCourse.Cryptography;
+using Clifton.Blockchain;
 
 namespace BlockChainCourse.BlockWithMultipleTransactions
 {
     public class Block : IBlock
     {
-        public List<ITransaction> Transaction { get; set; }
+        public List<ITransaction> Transaction { get; private set; }
 
         // Set as part of the block creation process.
         public int BlockNumber { get; private set; }
@@ -15,6 +16,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
         public string BlockHash { get; private set; }
         public string PreviousBlockHash { get; set; }
         public IBlock NextBlock { get; set; }
+        private MerkleTree merkleTree = new MerkleTree();
 
         public Block(int blockNumber)
         {
@@ -32,7 +34,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
         public string CalculateBlockHash(string previousBlockHash)
         {
             string blockheader = BlockNumber + CreatedDate.ToString() + previousBlockHash;
-            string combined = Transaction[0].CalculateTransactionHash() + blockheader;
+            string combined = merkleTree.RootNode + blockheader;
 
             return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
         }
@@ -51,13 +53,28 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
                 PreviousBlockHash = null;
             }
 
+            BuildMerkleTree();
+
             BlockHash = CalculateBlockHash(PreviousBlockHash);
         }
 
-      
+        private void BuildMerkleTree()
+        {
+            merkleTree = new MerkleTree();
+
+            foreach (ITransaction txn in Transaction)
+            {
+                merkleTree.AppendLeaf(MerkleHash.Create(txn.CalculateTransactionHash()));
+            }
+
+            merkleTree.BuildTree();
+        }
+
         public bool IsValidChain(string prevBlockHash, bool verbose)
         {
             bool isValid = true;
+
+            BuildMerkleTree();
 
             // Is this a valid block and transaction
             string newBlockHash = CalculateBlockHash(prevBlockHash);

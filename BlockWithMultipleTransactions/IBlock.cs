@@ -6,7 +6,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
     public interface IBlock
     {
         // List of transactions
-        List<ITransaction> Transaction { get; set; }
+        List<ITransaction> Transaction { get; }
 
         // Block header data
         int BlockNumber { get; }
