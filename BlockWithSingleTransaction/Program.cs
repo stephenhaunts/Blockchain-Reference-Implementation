@@ -39,7 +39,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             Console.WriteLine("");
             Console.WriteLine("");
 
-            block4.ClaimNumber = "XXX";
+            block4.CreatedDate = new DateTime(2017, 09, 20);
 
             chain.VerifyChain();
 

@@ -48,7 +48,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
                 throw new InvalidOperationException("Genesis block not set.");
             }
 
-            bool isValid = HeadBlock.IsValidChain(null);
+            bool isValid = HeadBlock.IsValidChain(null, true);
 
             if (isValid)
             {

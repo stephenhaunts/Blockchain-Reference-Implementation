@@ -12,13 +12,13 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         ClaimType ClaimType { get; set; }
 
         int BlockNumber { get; }
-        DateTime CreatedDate { get; }
+        DateTime CreatedDate { get; set; }
         string BlockHash { get; }
         string PreviousBlockHash { get; set; }
 
         string CalculateBlockHash(string previousBlockHash);
         void SetBlockHash(IBlock parent);
         IBlock NextBlock { get; set; }
-        bool IsValidChain(string prevBlockHash);
+        bool IsValidChain(string prevBlockHash, bool verbose);
     }
 }

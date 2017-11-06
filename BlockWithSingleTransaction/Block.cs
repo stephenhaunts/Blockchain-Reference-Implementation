@@ -16,7 +16,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
 
         // Set as part of the block creation process.
         public int BlockNumber { get; private set; }
-        public DateTime CreatedDate { get; private set; }
+        public DateTime CreatedDate { get; set; }
         public string BlockHash { get; private set; }
         public string PreviousBlockHash { get; set; }
         public IBlock NextBlock { get; set; }
@@ -66,7 +66,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         }
 
       
-        public bool IsValidChain(string prevBlockHash)
+        public bool IsValidChain(string prevBlockHash, bool verbose)
         {
             bool isValid = true;
 
@@ -76,26 +76,35 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             {
                 isValid = false;
             }
-  
+
             // Does the previous block hash match the latest previous block hash
             isValid |= PreviousBlockHash == prevBlockHash;
 
-            if (!isValid)
-            {
-                Console.WriteLine("Block Number " + BlockNumber + " : FAILED VERIFICATION");
-            }
-            else
-            {
-                Console.WriteLine("Block Number " + BlockNumber + " : PASS VERIFICATION");
-            }
+            PrintVerificationMessage(verbose, isValid);
 
-            // Check the next block
+            // Check the next block by passing in our newly calculated blockhash. This will be compared to the previous
+            // hash in the next block. They should match for the chain to be valid.
             if (NextBlock != null)
             {
-                return NextBlock.IsValidChain(newBlockHash);
+                return NextBlock.IsValidChain(newBlockHash, verbose);
             }
 
             return isValid;
+        }
+
+        private void PrintVerificationMessage(bool verbose, bool isValid)
+        {
+            if (verbose)
+            {
+                if (!isValid)
+                {
+                    Console.WriteLine("Block Number " + BlockNumber + " : FAILED VERIFICATION");
+                }
+                else
+                {
+                    Console.WriteLine("Block Number " + BlockNumber + " : PASS VERIFICATION");
+                }
+            }
         }
     }
 }
