@@ -18,6 +18,17 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             chain.AcceptBlock(block1);
             chain.AcceptBlock(block2);
             chain.AcceptBlock(block3);
+
+            chain.VerifyChain();
+
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            block2.ClaimNumber = "ARSE";
+
+            chain.VerifyChain();
+
+            Console.WriteLine();
         }
     }
 }

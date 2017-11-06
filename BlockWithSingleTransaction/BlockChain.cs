@@ -40,5 +40,15 @@ namespace BlockChainCourse.BlockWithSingleTransaction
                 return CurrentBlock.BlockNumber + 1;
             }
         }
+
+        public void VerifyChain()
+        {
+            if (HeadBlock == null)
+            {
+                throw new InvalidOperationException("Genesis block not set.");
+            }
+
+            HeadBlock.IsValidChain(null);
+        }
     }
 }

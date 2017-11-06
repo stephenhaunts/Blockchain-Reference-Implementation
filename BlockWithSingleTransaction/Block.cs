@@ -49,6 +49,15 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
         }
 
+        public string CalculateBlockHash(string previousBlockHash)
+        {
+            string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
+            string blockheader = BlockNumber + txnHash + CreatedDate + previousBlockHash;
+            string combined = txnHash + blockheader;
+
+            return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
+        }
+
         // Set the block hash
         public void SetBlockHash(IBlock parent)
         {
@@ -64,6 +73,37 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             }
 
             BlockHash = CalculateBlockHash();
+        }
+
+      
+        public void IsValidChain(string prevBlockHash)
+        {
+            bool failed = false;
+
+            // Is this a valid block and transaction
+            string newBlockHash = CalculateBlockHash(prevBlockHash);
+            if (newBlockHash != BlockHash)
+            {
+                failed = true;
+            }
+  
+            // Does the previous block hash match the latest previous block hash
+            failed |= PreviousBlockHash != prevBlockHash;
+
+            if (failed)
+            {
+                Console.WriteLine("Block Number " + BlockNumber + " : FAILED VERIFICATION");
+            }
+            else
+            {
+                Console.WriteLine("Block Number " + BlockNumber + " : PASS VERIFICATION");
+            }
+
+            // Check the next block
+            if (NextBlock != null)
+            {
+                NextBlock.IsValidChain(newBlockHash);
+            }
         }
     }
 }
