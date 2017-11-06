@@ -2,17 +2,42 @@
 using System.Text;
 using BlockChainCourse.Cryptography;
 
-namespace BlockChainCourse.BlockWithSingleTransaction
+namespace BlockChainCourse.BlockWithMultipleTransactions
 {
-    public class Block : IBlock
+    public class Transaction : ITransaction
     {
-        // Provided by the user
         public string ClaimNumber { get; set; }
         public decimal SettlementAmount { get; set; }
         public DateTime SettlementDate { get; set; }
         public string CarRegistration { get; set; }
         public int Mileage { get; set; }
         public ClaimType ClaimType { get; set; }
+
+        public Transaction(string claimNumber,
+                            decimal settlementAmount,
+                            DateTime settlementDate,
+                            string carRegistration,
+                            int mileage,
+                            ClaimType claimType)
+        {
+            ClaimNumber = claimNumber;
+            SettlementAmount = settlementAmount;
+            SettlementDate = settlementDate;
+            CarRegistration = carRegistration;
+            Mileage = mileage;
+            ClaimType = claimType;
+        }
+
+        public string CalculateTransactionHash()
+        {
+            string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
+            return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(txnHash)));
+        }
+    }
+
+    public class Block : IBlock
+    {
+        public ITransaction Transaction { get; set; }
 
         // Set as part of the block creation process.
         public int BlockNumber { get; private set; }
@@ -21,29 +46,18 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         public string PreviousBlockHash { get; set; }
         public IBlock NextBlock { get; set; }
 
-        public Block(int blockNumber,
-                     string claimNumber,
-                     decimal settlementAmount,
-                     DateTime settlementDate,
-                     string carRegistration,
-                     int mileage,
-                     ClaimType claimType)
+        public Block(int blockNumber, ITransaction transaction)
         {
             BlockNumber = blockNumber;
-            ClaimNumber = claimNumber;
-            SettlementAmount = settlementAmount;
-            SettlementDate = settlementDate;
-            CarRegistration = carRegistration;
-            Mileage = mileage;
-            ClaimType = claimType;
+            Transaction = transaction;
+
             CreatedDate = DateTime.UtcNow;
         }
 
         public string CalculateBlockHash(string previousBlockHash)
         {
-            string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
             string blockheader = BlockNumber + CreatedDate.ToString() + previousBlockHash;
-            string combined = txnHash + blockheader;
+            string combined = Transaction.CalculateTransactionHash() + blockheader;
 
             return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
         }
