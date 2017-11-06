@@ -39,16 +39,6 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             CreatedDate = DateTime.UtcNow;
         }
 
-        // Calculate and return the block hash
-        public string CalculateBlockHash()
-        {
-            string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
-            string blockheader = BlockNumber + txnHash + CreatedDate + PreviousBlockHash;
-            string combined = txnHash + blockheader;
-
-            return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
-        }
-
         public string CalculateBlockHash(string previousBlockHash)
         {
             string txnHash = ClaimNumber + SettlementAmount + SettlementDate + CarRegistration + Mileage + ClaimType;
@@ -72,7 +62,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
                 PreviousBlockHash = null;
             }
 
-            BlockHash = CalculateBlockHash();
+            BlockHash = CalculateBlockHash(PreviousBlockHash);
         }
 
       
