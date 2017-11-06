@@ -24,3 +24,9 @@ BlockWithSingleTransaction/obj/
 BlockWithTransactionPool/bin/Debug/netcoreapp2\.0/
 
 BlockWithTransactionPool/obj/Debug/netcoreapp2\.0/
+
+ProofOfWorkTest/bin/Debug/netcoreapp2\.0/
+
+ProofOfWorkTest/obj/Debug/netcoreapp2\.0/
+
+ProofOfWorkTest/obj/
