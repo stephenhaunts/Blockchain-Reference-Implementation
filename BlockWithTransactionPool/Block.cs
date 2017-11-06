@@ -4,7 +4,7 @@ using System.Text;
 using BlockChainCourse.Cryptography;
 using Clifton.Blockchain;
 
-namespace BlockChainCourse.BlockWithMultipleTransactions
+namespace BlockChainCourse.BlockWithTransactionPool
 {
     public class Block : IBlock
     {

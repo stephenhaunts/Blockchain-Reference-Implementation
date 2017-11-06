@@ -1,4 +1,4 @@
-﻿namespace BlockChainCourse.BlockWithMultipleTransactions
+﻿namespace BlockChainCourse.BlockWithTransactionPool
 {
     public enum ClaimType
     {

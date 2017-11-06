@@ -2,7 +2,7 @@
 using System.Text;
 using BlockChainCourse.Cryptography;
 
-namespace BlockChainCourse.BlockWithMultipleTransactions
+namespace BlockChainCourse.BlockWithTransactionPool
 {
     public class Transaction : ITransaction
     {

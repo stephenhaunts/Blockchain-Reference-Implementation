@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlockChainCourse.BlockWithMultipleTransactions
+namespace BlockChainCourse.BlockWithTransactionPool
 {
     public interface ITransaction
     {
