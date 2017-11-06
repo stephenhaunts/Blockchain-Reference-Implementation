@@ -1,4 +1,5 @@
 ﻿using System;
+using Clifton.Blockchain;
 
 namespace BlockChainCourse.BlockWithMultipleTransactions
 {
@@ -17,14 +18,24 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             ITransaction txn8 = new Transaction("PLO254", 8000.00m, DateTime.Now, "VBN456", 80000, ClaimType.TotalLoss);
 
 
-            IBlock block1 = new Block(0, txn1);
-            IBlock block2 = new Block(1, txn2);
-            IBlock block3 = new Block(2, txn3);
-            IBlock block4 = new Block(3, txn4);
-            IBlock block5 = new Block(4, txn5);
-            IBlock block6 = new Block(5, txn6);
-            IBlock block7 = new Block(6, txn7);
-            IBlock block8 = new Block(7, txn8);
+            IBlock block1 = new Block(0);
+            IBlock block2 = new Block(1);
+            IBlock block3 = new Block(2);
+            IBlock block4 = new Block(3);
+            IBlock block5 = new Block(4);
+            IBlock block6 = new Block(5);
+            IBlock block7 = new Block(6);
+            IBlock block8 = new Block(7);
+
+            block1.AddTransaction(txn1);
+            block2.AddTransaction(txn2);
+            block3.AddTransaction(txn3);
+            block4.AddTransaction(txn4);
+            block5.AddTransaction(txn5);
+            block6.AddTransaction(txn6);
+            block7.AddTransaction(txn7);
+            block8.AddTransaction(txn8);
+
 
             block1.SetBlockHash(null);
             block2.SetBlockHash(block1);
@@ -50,11 +61,37 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
             Console.WriteLine("");
             Console.WriteLine("");
 
-            block4.Transaction.CarRegistration = "INVALID";
+            block4.Transaction[0].CarRegistration = "INVALID";
 
             chain.VerifyChain();
 
             Console.WriteLine();
+
+
+
+
+
+
+            //MerkleTree tree = new MerkleTree();
+            //tree.AppendLeaf(MerkleHash.Create("abc"));
+            //tree.AppendLeaf(MerkleHash.Create("def"));
+            //tree.AppendLeaf(MerkleHash.Create("123"));
+            //tree.AppendLeaf(MerkleHash.Create("456"));
+            //tree.BuildTree();
+            //tree.RootNode.ToString();
+
+            //MerkleTree tree2 = new MerkleTree();
+            //tree2.AppendLeaf(MerkleHash.Create("abc"));
+            //tree2.AppendLeaf(MerkleHash.Create("def"));
+            //tree2.AppendLeaf(MerkleHash.Create("123"));
+            //tree2.AppendLeaf(MerkleHash.Create("456"));
+            //tree2.BuildTree();
+            //tree2.RootNode.ToString();
+
+            //if (tree.RootNode.ToString() == tree2.RootNode.ToString())
+            //{
+            //    Console.WriteLine("yay");
+            //}
         }
     }
 }

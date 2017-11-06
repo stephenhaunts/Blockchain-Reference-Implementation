@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using BlockChainCourse.Cryptography;
 
@@ -6,7 +7,7 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
 {
     public class Block : IBlock
     {
-        public ITransaction Transaction { get; set; }
+        public List<ITransaction> Transaction { get; set; }
 
         // Set as part of the block creation process.
         public int BlockNumber { get; private set; }
@@ -15,18 +16,23 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
         public string PreviousBlockHash { get; set; }
         public IBlock NextBlock { get; set; }
 
-        public Block(int blockNumber, ITransaction transaction)
+        public Block(int blockNumber)
         {
             BlockNumber = blockNumber;
-            Transaction = transaction;
 
             CreatedDate = DateTime.UtcNow;
+            Transaction = new List<ITransaction>();
+        }
+
+        public void AddTransaction(ITransaction transaction)
+        {
+            Transaction.Add(transaction);
         }
 
         public string CalculateBlockHash(string previousBlockHash)
         {
             string blockheader = BlockNumber + CreatedDate.ToString() + previousBlockHash;
-            string combined = Transaction.CalculateTransactionHash() + blockheader;
+            string combined = Transaction[0].CalculateTransactionHash() + blockheader;
 
             return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
         }
