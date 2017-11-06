@@ -6,4 +6,7 @@
     <RootNamespace>BlockChainCourse.ProofOfWorkTest</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlockChainCourse\Cryptography.csproj" />
+  </ItemGroup>
 </Project>
