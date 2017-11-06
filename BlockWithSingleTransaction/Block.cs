@@ -66,21 +66,21 @@ namespace BlockChainCourse.BlockWithSingleTransaction
         }
 
       
-        public void IsValidChain(string prevBlockHash)
+        public bool IsValidChain(string prevBlockHash)
         {
-            bool failed = false;
+            bool isValid = true;
 
             // Is this a valid block and transaction
             string newBlockHash = CalculateBlockHash(prevBlockHash);
             if (newBlockHash != BlockHash)
             {
-                failed = true;
+                isValid = false;
             }
   
             // Does the previous block hash match the latest previous block hash
-            failed |= PreviousBlockHash != prevBlockHash;
+            isValid |= PreviousBlockHash == prevBlockHash;
 
-            if (failed)
+            if (!isValid)
             {
                 Console.WriteLine("Block Number " + BlockNumber + " : FAILED VERIFICATION");
             }
@@ -92,8 +92,10 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             // Check the next block
             if (NextBlock != null)
             {
-                NextBlock.IsValidChain(newBlockHash);
+                return NextBlock.IsValidChain(newBlockHash);
             }
+
+            return isValid;
         }
     }
 }

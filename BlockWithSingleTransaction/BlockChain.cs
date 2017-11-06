@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlockChainCourse.BlockWithSingleTransaction
 {
-    public class BlockChain
+    public class BlockChain : IBlockChain
     {
         public IBlock CurrentBlock { get; private set; }
         public IBlock HeadBlock { get; private set; }
@@ -48,7 +48,16 @@ namespace BlockChainCourse.BlockWithSingleTransaction
                 throw new InvalidOperationException("Genesis block not set.");
             }
 
-            HeadBlock.IsValidChain(null);
+            bool isValid = HeadBlock.IsValidChain(null);
+
+            if (isValid)
+            {
+                Console.WriteLine("Blockchain integrity intact.");
+            }
+            else
+            {
+                Console.WriteLine("Blockchain integrity NOT intact.");
+            }
         }
     }
 }
