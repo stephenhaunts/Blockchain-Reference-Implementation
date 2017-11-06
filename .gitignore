@@ -20,3 +20,7 @@ BlockWithSingleTransaction/bin/Debug/netcoreapp2\.0/
 BlockWithSingleTransaction/obj/
 
 \.vs/BlockChainCourse/v15/\.suo
+
+BlockWithTransactionPool/bin/Debug/netcoreapp2\.0/
+
+BlockWithTransactionPool/obj/Debug/netcoreapp2\.0/
