@@ -9,4 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlockChainCourse\Cryptography.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Merkle\" />
+  </ItemGroup>
 </Project>
