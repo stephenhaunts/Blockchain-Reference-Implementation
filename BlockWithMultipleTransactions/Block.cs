@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BlockChainCourse.BlockWithMultipleTransactions.Interfaces;
 using BlockChainCourse.Cryptography;
 using Clifton.Blockchain;
 

@@ -18,6 +18,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
         public IBlock NextBlock { get; set; }
         private MerkleTree merkleTree = new MerkleTree();
 
+
         public Block(int blockNumber)
         {
             BlockNumber = blockNumber;

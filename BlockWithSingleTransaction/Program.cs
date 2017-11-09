@@ -1,4 +1,5 @@
 ﻿using System;
+using BlockChainCourse.BlockWithSingleTransaction.Interfaces;
 
 namespace BlockChainCourse.BlockWithSingleTransaction
 {

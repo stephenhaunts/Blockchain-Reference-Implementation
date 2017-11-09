@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlockChainCourse.BlockWithMultipleTransactions
+namespace BlockChainCourse.BlockWithMultipleTransactions.Interfaces
 {
     public interface ITransaction
     {

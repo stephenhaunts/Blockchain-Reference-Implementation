@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace BlockChainCourse.BlockWithSingleTransaction
+namespace BlockChainCourse.BlockWithMultipleTransactions.Interfaces
 {
     public interface IBlock
     {
-        string ClaimNumber { get; set; }
-        decimal SettlementAmount { get; set; }
-        DateTime SettlementDate { get; set; }
-        string CarRegistration { get; set; }
-        int Mileage { get; set; }
-        ClaimType ClaimType { get; set; }
+        // List of transactions
+        List<ITransaction> Transaction { get; }
 
+        // Block header data
         int BlockNumber { get; }
         DateTime CreatedDate { get; set; }
         string BlockHash { get; }
         string PreviousBlockHash { get; set; }
 
+        void AddTransaction(ITransaction transaction);
         string CalculateBlockHash(string previousBlockHash);
         void SetBlockHash(IBlock parent);
         IBlock NextBlock { get; set; }

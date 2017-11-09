@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using BlockChainCourse.BlockWithMultipleTransactions.Interfaces;
 using BlockChainCourse.Cryptography;
 
 namespace BlockChainCourse.BlockWithMultipleTransactions

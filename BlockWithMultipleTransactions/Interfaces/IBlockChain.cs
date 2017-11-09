@@ -1,4 +1,4 @@
-﻿namespace BlockChainCourse.BlockWithMultipleTransactions
+﻿namespace BlockChainCourse.BlockWithMultipleTransactions.Interfaces
 {
     public interface IBlockChain
     {

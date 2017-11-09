@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BlockChainCourse.BlockWithSingleTransaction.Interfaces;
 
 namespace BlockChainCourse.BlockWithSingleTransaction
 {
