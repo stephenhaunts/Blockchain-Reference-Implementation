@@ -19,5 +19,6 @@ namespace BlockChainCourse.BlockWithTransactionPool
         void SetBlockHash(IBlock parent);
         IBlock NextBlock { get; set; }
         bool IsValidChain(string prevBlockHash, bool verbose);
+        IKeyStore KeyStore { get; }
     }
 }

@@ -17,7 +17,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
         public string PreviousBlockHash { get; set; }
         public IBlock NextBlock { get; set; }
         private MerkleTree merkleTree = new MerkleTree();
-
+        public IKeyStore KeyStore { get; private set; }
 
         public Block(int blockNumber)
         {
@@ -25,6 +25,15 @@ namespace BlockChainCourse.BlockWithTransactionPool
 
             CreatedDate = DateTime.UtcNow;
             Transaction = new List<ITransaction>();
+        }
+
+        public Block(int blockNumber, IKeyStore keystore)
+        {
+            BlockNumber = blockNumber;
+
+            CreatedDate = DateTime.UtcNow;
+            Transaction = new List<ITransaction>();
+            KeyStore = keystore;
         }
 
         public void AddTransaction(ITransaction transaction)
@@ -37,7 +46,18 @@ namespace BlockChainCourse.BlockWithTransactionPool
             string blockheader = BlockNumber + CreatedDate.ToString() + previousBlockHash;
             string combined = merkleTree.RootNode + blockheader;
 
-            return Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
+            string completeBlockHash;
+
+            if (KeyStore == null)
+            {
+                completeBlockHash = Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
+            }
+            else
+            {
+                completeBlockHash = Convert.ToBase64String(Hmac.ComputeHmacsha256(Encoding.UTF8.GetBytes(combined), KeyStore.AuthenticatedHashKey));
+            }
+
+            return completeBlockHash;
         }
 
         // Set the block hash

@@ -1,4 +1,5 @@
 ﻿using System;
+using BlockChainCourse.Cryptography;
 
 namespace BlockChainCourse.BlockWithTransactionPool
 {
@@ -13,11 +14,12 @@ namespace BlockChainCourse.BlockWithTransactionPool
         static void Main(string[] args)
         {
             ITransaction txn5 = SetupTransactions();
+            IKeyStore keyStore = new KeyStore(Hmac.GenerateKey());
 
-            IBlock block1 = new Block(0);
-            IBlock block2 = new Block(1);
-            IBlock block3 = new Block(2);
-            IBlock block4 = new Block(3);
+            IBlock block1 = new Block(0, keyStore);
+            IBlock block2 = new Block(1, keyStore);
+            IBlock block3 = new Block(2, keyStore);
+            IBlock block4 = new Block(3, keyStore);
 
             AddTransactionsToBlocksAndCalculateHashes(block1, block2, block3, block4);
 
@@ -101,6 +103,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
             txnPool.AddTransaction(txn14);
             txnPool.AddTransaction(txn15);
             txnPool.AddTransaction(txn16);
+
             return txn5;
         }
     }

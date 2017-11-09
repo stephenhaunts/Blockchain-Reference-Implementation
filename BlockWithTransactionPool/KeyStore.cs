@@ -9,6 +9,11 @@ namespace BlockChainCourse.BlockWithTransactionPool
         public RSAParameters PublicSigningKey { get; private set; }
         public byte[] AuthenticatedHashKey { get; private set; }
 
+        public KeyStore(byte[] authenticatedHashKey)
+        {
+            AuthenticatedHashKey = authenticatedHashKey;
+        }
+
         public KeyStore(RSAParameters privateSigningKey, RSAParameters publicSigningKey, byte[] authenticatedHashKey)
         {
             PrivateSigningKey = privateSigningKey;
