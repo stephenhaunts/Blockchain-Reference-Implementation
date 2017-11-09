@@ -30,3 +30,7 @@ ProofOfWorkTest/bin/Debug/netcoreapp2\.0/
 ProofOfWorkTest/obj/Debug/netcoreapp2\.0/
 
 ProofOfWorkTest/obj/
+
+BlockWithProofOfWork/bin/Debug/netcoreapp2\.0/
+
+BlockWithProofOfWork/obj/
