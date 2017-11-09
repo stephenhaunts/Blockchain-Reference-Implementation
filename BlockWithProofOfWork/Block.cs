@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using BlockChainCourse.Cryptography;
 using Clifton.Blockchain;
@@ -16,6 +17,8 @@ namespace BlockChainCourse.BlockWithProofOfWork
         public string BlockHash { get; private set; }
         public string PreviousBlockHash { get; set; }
         public string BlockSignature { get; private set; }
+        public int Difficulty { get; private set; }
+        public int Nonce { get; private set; }
 
         public IBlock NextBlock { get; set; }
         private MerkleTree merkleTree = new MerkleTree();
@@ -27,6 +30,7 @@ namespace BlockChainCourse.BlockWithProofOfWork
 
             CreatedDate = DateTime.UtcNow;
             Transaction = new List<ITransaction>();
+            Difficulty = 4;
         }
 
         public Block(int blockNumber, IKeyStore keystore)
@@ -36,6 +40,7 @@ namespace BlockChainCourse.BlockWithProofOfWork
             CreatedDate = DateTime.UtcNow;
             Transaction = new List<ITransaction>();
             KeyStore = keystore;
+            Difficulty = 4;
         }
 
         public void AddTransaction(ITransaction transaction)
@@ -56,7 +61,7 @@ namespace BlockChainCourse.BlockWithProofOfWork
             }
             else
             {
-                completeBlockHash = Convert.ToBase64String(Hmac.ComputeHmacsha256(Encoding.UTF8.GetBytes(combined), KeyStore.AuthenticatedHashKey));
+                completeBlockHash = Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(combined)));
             }
 
             return completeBlockHash;
@@ -78,7 +83,9 @@ namespace BlockChainCourse.BlockWithProofOfWork
 
             BuildMerkleTree();
 
-            BlockHash = CalculateBlockHash(PreviousBlockHash);
+            //BlockHash = CalculateBlockHash(PreviousBlockHash);
+
+            BlockHash = CalculateProofOfWork(CalculateBlockHash(PreviousBlockHash));
 
             if (KeyStore != null)
             {
@@ -98,6 +105,44 @@ namespace BlockChainCourse.BlockWithProofOfWork
             merkleTree.BuildTree();
         }
 
+        public string CalculateProofOfWork(string blockHash)
+        {
+            string difficulty = DifficultyString();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            while (true)
+            {
+                string hashedData = Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(Nonce + blockHash)));
+
+                if (hashedData.StartsWith(difficulty, StringComparison.Ordinal))
+                {
+                    stopWatch.Stop();
+                    TimeSpan ts = stopWatch.Elapsed;
+
+                    // Format and display the TimeSpan value.
+                    string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+                    Console.WriteLine("Difficulty Level " + Difficulty + " - Nonce = " + Nonce + " - Elapsed = " + elapsedTime + " - " + hashedData);
+                    return hashedData;
+                }
+
+                Nonce++;
+            }
+        }
+
+        private string DifficultyString()
+        {
+            string difficultyString = string.Empty;
+
+            for (int i = 0; i < Difficulty; i++)
+            {
+                difficultyString += "0";
+            }
+
+            return difficultyString;
+        }
+
         public bool IsValidChain(string prevBlockHash, bool verbose)
         {
             bool isValid = true;
@@ -108,7 +153,8 @@ namespace BlockChainCourse.BlockWithProofOfWork
             validSignature = KeyStore.VerifyBlock(BlockHash, BlockSignature);
 
             // Is this a valid block and transaction
-            string newBlockHash = CalculateBlockHash(prevBlockHash);
+            //string newBlockHash = CalculateBlockHash(prevBlockHash);
+            string newBlockHash = Convert.ToBase64String(HashData.ComputeHashSha256(Encoding.UTF8.GetBytes(Nonce + CalculateBlockHash(prevBlockHash))));
 
             validSignature = KeyStore.VerifyBlock(newBlockHash, BlockSignature);
 

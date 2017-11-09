@@ -14,6 +14,8 @@ namespace BlockChainCourse.BlockWithProofOfWork
         string BlockHash { get; }
         string PreviousBlockHash { get; set; }
         string BlockSignature { get; }
+        int Difficulty { get; }
+        int Nonce { get; }
 
         void AddTransaction(ITransaction transaction);
         string CalculateBlockHash(string previousBlockHash);
