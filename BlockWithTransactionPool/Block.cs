@@ -15,6 +15,8 @@ namespace BlockChainCourse.BlockWithTransactionPool
         public DateTime CreatedDate { get; set; }
         public string BlockHash { get; private set; }
         public string PreviousBlockHash { get; set; }
+        public string BlockSignature { get; private set; }
+
         public IBlock NextBlock { get; set; }
         private MerkleTree merkleTree = new MerkleTree();
         public IKeyStore KeyStore { get; private set; }
@@ -77,6 +79,11 @@ namespace BlockChainCourse.BlockWithTransactionPool
             BuildMerkleTree();
 
             BlockHash = CalculateBlockHash(PreviousBlockHash);
+
+            if (KeyStore != null)
+            {
+                BlockSignature = KeyStore.SignBlock(BlockHash);
+            }
         }
 
         private void BuildMerkleTree()
@@ -94,11 +101,17 @@ namespace BlockChainCourse.BlockWithTransactionPool
         public bool IsValidChain(string prevBlockHash, bool verbose)
         {
             bool isValid = true;
+            bool validSignature = false;
 
             BuildMerkleTree();
 
+            validSignature = KeyStore.VerifyBlock(BlockHash, BlockSignature);
+
             // Is this a valid block and transaction
             string newBlockHash = CalculateBlockHash(prevBlockHash);
+
+            validSignature = KeyStore.VerifyBlock(newBlockHash, BlockSignature);
+
             if (newBlockHash != BlockHash)
             {
                 isValid = false;
@@ -109,7 +122,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
                 isValid |= PreviousBlockHash == prevBlockHash;
             }
 
-            PrintVerificationMessage(verbose, isValid);
+            PrintVerificationMessage(verbose, isValid, validSignature);
 
             // Check the next block by passing in our newly calculated blockhash. This will be compared to the previous
             // hash in the next block. They should match for the chain to be valid.
@@ -121,7 +134,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
             return isValid;
         }
 
-        private void PrintVerificationMessage(bool verbose, bool isValid)
+        private void PrintVerificationMessage(bool verbose, bool isValid, bool validSignature)
         {
             if (verbose)
             {
@@ -132,6 +145,11 @@ namespace BlockChainCourse.BlockWithTransactionPool
                 else
                 {
                     Console.WriteLine("Block Number " + BlockNumber + " : PASS VERIFICATION");
+                }
+
+                if (!validSignature)
+                {
+                    Console.WriteLine("Block Number " + BlockNumber + " : Invalid Digital Signature");
                 }
             }
         }

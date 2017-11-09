@@ -13,6 +13,7 @@ namespace BlockChainCourse.BlockWithTransactionPool
         DateTime CreatedDate { get; set; }
         string BlockHash { get; }
         string PreviousBlockHash { get; set; }
+        string BlockSignature { get; }
 
         void AddTransaction(ITransaction transaction);
         string CalculateBlockHash(string previousBlockHash);

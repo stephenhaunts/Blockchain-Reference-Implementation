@@ -4,8 +4,8 @@ namespace BlockChainCourse.BlockWithTransactionPool
 {
     public interface IKeyStore
     {
-        RSAParameters PrivateSigningKey { get; }
-        RSAParameters PublicSigningKey { get; }
         byte[] AuthenticatedHashKey { get; }
+        string SignBlock(string blockHash);
+        bool VerifyBlock(string blockHash, string signature);
     }
 }

@@ -1,24 +1,29 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Text;
+using BlockChainCourse.Cryptography;
 
 namespace BlockChainCourse.BlockWithTransactionPool
 {
-
     public class KeyStore : IKeyStore
     {
-        public RSAParameters PrivateSigningKey { get; private set; }
-        public RSAParameters PublicSigningKey { get; private set; }
+        private DigitalSignature DigitalSignature { get; set; }
         public byte[] AuthenticatedHashKey { get; private set; }
 
         public KeyStore(byte[] authenticatedHashKey)
         {
             AuthenticatedHashKey = authenticatedHashKey;
+            DigitalSignature = new DigitalSignature();
+            DigitalSignature.AssignNewKey();
         }
 
-        public KeyStore(RSAParameters privateSigningKey, RSAParameters publicSigningKey, byte[] authenticatedHashKey)
+        public string SignBlock(string blockHash)
         {
-            PrivateSigningKey = privateSigningKey;
-            PublicSigningKey = publicSigningKey;
-            AuthenticatedHashKey = authenticatedHashKey;
+            return Convert.ToBase64String(DigitalSignature.SignData(Convert.FromBase64String(blockHash)));
+        }
+
+        public bool VerifyBlock(string blockHash, string signature)
+        {
+            return DigitalSignature.VerifySignature(Convert.FromBase64String(blockHash), Convert.FromBase64String(signature));  
         }
     }
 }
