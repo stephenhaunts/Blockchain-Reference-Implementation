@@ -4,6 +4,10 @@ namespace BlockChainCourse.BlockWithMultipleTransactions
 {
     class Program
     {
+        ///
+        /// Single block with a multiple transactions, in an immutable chain.
+        /// Standard SHA-256 Hashing
+        ///
         static void Main(string[] args)
         {
             ITransaction txn1 = new Transaction("ABC123", 1000.00m, DateTime.Now, "QWE123", 10000, ClaimType.TotalLoss);

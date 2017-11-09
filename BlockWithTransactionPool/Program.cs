@@ -4,7 +4,12 @@ namespace BlockChainCourse.BlockWithTransactionPool
 {
     class Program
     {
-        static TransactionPool txnPool = new TransactionPool();
+        static readonly TransactionPool txnPool = new TransactionPool();
+
+        ///
+        /// Single block with a multiple transactions, in an immutable chain with transactions taken from a transaction pool.
+        /// Hashing with HMAC(SHA-256) and a Digital Signature
+        ///
         static void Main(string[] args)
         {
             ITransaction txn5 = SetupTransactions();

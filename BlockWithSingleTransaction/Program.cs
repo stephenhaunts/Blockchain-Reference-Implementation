@@ -4,6 +4,10 @@ namespace BlockChainCourse.BlockWithSingleTransaction
 {
     class Program
     {
+        ///
+        /// Single block with a single transaction, in an immutable chain.
+        /// Standard SHA-256 Hashing
+        ///
         static void Main(string[] args)
         {
             IBlock block1 = new Block(0, "ABC123", 1000.00m, DateTime.Now, "QWE123", 10000, ClaimType.TotalLoss);
