@@ -16,10 +16,10 @@ namespace BlockChainCourse.BlockWithProofOfWork
             ITransaction txn5 = SetupTransactions();
             IKeyStore keyStore = new KeyStore(Hmac.GenerateKey());
 
-            IBlock block1 = new Block(0, keyStore);
-            IBlock block2 = new Block(1, keyStore);
-            IBlock block3 = new Block(2, keyStore);
-            IBlock block4 = new Block(3, keyStore);
+            IBlock block1 = new Block(0, keyStore, 3);
+            IBlock block2 = new Block(1, keyStore, 3);
+            IBlock block3 = new Block(2, keyStore, 3);
+            IBlock block4 = new Block(3, keyStore, 3);
 
             AddTransactionsToBlocksAndCalculateHashes(block1, block2, block3, block4);
 

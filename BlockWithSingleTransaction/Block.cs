@@ -28,7 +28,8 @@ namespace BlockChainCourse.BlockWithSingleTransaction
                      DateTime settlementDate,
                      string carRegistration,
                      int mileage,
-                     ClaimType claimType)
+                     ClaimType claimType, 
+                     IBlock parent)
         {
             BlockNumber = blockNumber;
             ClaimNumber = claimNumber;
@@ -38,6 +39,7 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             Mileage = mileage;
             ClaimType = claimType;
             CreatedDate = DateTime.UtcNow;
+            SetBlockHash(parent);
         }
 
         public string CalculateBlockHash(string previousBlockHash)

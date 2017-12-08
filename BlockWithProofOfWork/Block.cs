@@ -24,23 +24,23 @@ namespace BlockChainCourse.BlockWithProofOfWork
         private MerkleTree merkleTree = new MerkleTree();
         public IKeyStore KeyStore { get; private set; }
 
-        public Block(int blockNumber)
+        public Block(int blockNumber, int miningDifficulty)
         {
             BlockNumber = blockNumber;
 
             CreatedDate = DateTime.UtcNow;
             Transaction = new List<ITransaction>();
-            Difficulty = 4;
+            Difficulty = miningDifficulty;
         }
 
-        public Block(int blockNumber, IKeyStore keystore)
+        public Block(int blockNumber, IKeyStore keystore, int miningDifficulty)
         {
             BlockNumber = blockNumber;
 
             CreatedDate = DateTime.UtcNow;
             Transaction = new List<ITransaction>();
             KeyStore = keystore;
-            Difficulty = 4;
+            Difficulty = miningDifficulty;
         }
 
         public void AddTransaction(ITransaction transaction)

@@ -29,19 +29,6 @@ namespace BlockChainCourse.BlockWithSingleTransaction
             Blocks.Add(block);
         }
 
-        public int NextBlockNumber
-        {
-            get
-            {
-                if (HeadBlock == null)
-                { 
-                    return 0; 
-                }
-
-                return CurrentBlock.BlockNumber + 1;
-            }
-        }
-
         public void VerifyChain()
         {
             if (HeadBlock == null)
