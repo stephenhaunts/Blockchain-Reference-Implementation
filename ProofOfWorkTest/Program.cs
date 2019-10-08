@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlockChainCourse.ProofOfWorkTest
+﻿namespace BlockChainCourse.ProofOfWorkTest
 {
     class Program
     {

@@ -34,3 +34,23 @@ ProofOfWorkTest/obj/
 BlockWithProofOfWork/bin/Debug/netcoreapp2\.0/
 
 BlockWithProofOfWork/obj/
+
+.vs/BlockChainCourse/xs/project-cache/
+
+.vs/BlockChainCourse/xs/sqlite3/
+
+.vs/BlockChainCourse/xs/
+
+BlockChainCourse/bin/Debug/netcoreapp3.0/
+
+BlockWithMultipleTransactions/bin/Debug/netcoreapp3.0/
+
+BlockWithProofOfWork/bin/Debug/netcoreapp3.0/
+
+BlockWithSingleTransaction/bin/Debug/netcoreapp3.0/
+
+BlockWithTransactionPool/bin/Debug/netcoreapp3.0/
+
+BlockWithTransactionPool/obj/
+
+ProofOfWorkTest/bin/Debug/netcoreapp3.0/
